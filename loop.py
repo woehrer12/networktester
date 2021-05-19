@@ -33,12 +33,12 @@ looptime = 0
 while True:
     if looptime < int(time.time()):
         looptime = int(time.time()) + 60
-        for ip in ip_list():
+        for ip in ip_list:
             Ping.check_ping(ip)        
-        for ip in Address.bigData():
+        for ip in Address.hostname_bigData():
             Ping.check_ping(ip)
-        for ip in Address.bigDNS():
+        for ip in Address.ip_bigDNS():
             Ping.check_ping(ip)        
-        for address in Address.bigData():
+        for address in Address.hostname_bigData():
             Request.check_request(address)
 
