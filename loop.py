@@ -3,13 +3,15 @@ import time
 import logging
 
 #Importe eigene Pakete
-import Ping
+import Klassen.Ping
 import config
-import Request
+import Klassen.Request
+import Klassen.Address
 
 #Klassen deklerationen
-Ping = Ping.Ping_Class()
-Request = Request.Request_Class()
+Ping = Klassen.Ping.Ping_Class()
+Request = Klassen.Request.Request_Class()
+Address = Klassen.Address.Address_Class()
 
 #Logging
 logger = logging.getLogger()
@@ -21,7 +23,7 @@ handler.setLevel(logging.INFO)
 logger.addHandler(handler)
 
 #Initialisieren
-ip_list = ["8.8.8.8","8.8.4.4","2001:4860:4860::8888","2001:4860:4860::8844","google.de","google.com","ipv6.google.com","192.168.50.1","192.168.0.1"]
+ip_list = ["192.168.50.1","192.168.0.1"]
 address_list = ["google.de","vodafone.de"]
 config.config()
 starttime = int(time.time())
@@ -31,8 +33,12 @@ looptime = 0
 while True:
     if looptime < int(time.time()):
         looptime = int(time.time()) + 60
-        for ip in ip_list:
+        for ip in ip_list():
+            Ping.check_ping(ip)        
+        for ip in Address.bigData():
             Ping.check_ping(ip)
-        for address in address_list:
+        for ip in Address.bigDNS():
+            Ping.check_ping(ip)        
+        for address in Address.bigData():
             Request.check_request(address)
 
