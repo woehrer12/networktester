@@ -28,7 +28,9 @@ class Request_Class:
             return False
 
     def check_addrinfo(self,address):
-        Liste =  socket.getaddrinfo(address,0)
-        for ergebnis in Liste:
-            logging.Error("Adressabfrage: " + address + ergebnis[4][0])
-        return Liste
+        try:
+            Liste =  socket.getaddrinfo(address,0)
+            for ergebnis in Liste:
+                logging.error("Adressabfrage: " + address + ergebnis[4][0])
+        except:
+            logging.error("Adressabfrage: "+ address + str(sys.exc_info()))
