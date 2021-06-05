@@ -1,6 +1,7 @@
 #Importe Python Pakete
 import time
 import logging
+import os
 
 #Importe eigene Pakete
 import Klassen.Ping
@@ -29,8 +30,19 @@ config.config()
 starttime = int(time.time())
 looptime = 0
 
+def printscreen():
+
+   os.system('clear')
+   print("##### networktester #####")
+   print("tested IPs: " + str(ip_list))
+   print("tested hostname bigData: " + str(Address.hostname_bigData()))
+   print("tested IPs bigDNS: " + str(Address.ip_bigDNS()))
+   print(time.strftime('%d-%m-%Y %H:%M:%S', time.localtime()))
+
+
 
 while True:
+    printscreen()
     if looptime < int(time.time()):
         looptime = int(time.time()) + 60
         #Ping Check
@@ -46,4 +58,5 @@ while True:
         #HTTP Request
         for address in Address.hostname_bigData():
             Request.check_request(address)
+    time.sleep(10)
 

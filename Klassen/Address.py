@@ -3,7 +3,7 @@ from typing import List
 
 class Address_Class:
     def hostname_bigData(self):
-        List = ["google.de", "google.com", "ipv6.google.com", "aws.amazon.com", "vodafone.de"]
+        List = ["google.de", "google.com", "ipv6.google.com", "aws.amazon.com", "vodafone.de", "wikipedia.org"]
         return List
 
     def ip_bigDNS(self):

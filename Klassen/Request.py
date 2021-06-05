@@ -17,13 +17,15 @@ class Request_Class:
             response = requests.get(
                 address,  timeout=60, headers=self.headers)
         except:
-            logging.error("Request Error: "+ address + str(sys.exc_info()))
+            print("Request Error: "+ address + str(sys.exc_info()))
+            logging.error("Request Error: " + address + str(sys.exc_info()))
             self.check_addrinfo(address)
             return False
         if response.status_code == 200:
             return  True
         else:
-            logging.error("Request Error: " )
+            print("Request Error: " + address)
+            logging.error("Request Error: " + address)
             self.check_addrinfo(address)
             return False
 
@@ -31,6 +33,8 @@ class Request_Class:
         try:
             Liste =  socket.getaddrinfo(address,0)
             for ergebnis in Liste:
+                print("Adressabfrage: " + address + ergebnis[4][0])
                 logging.error("Adressabfrage: " + address + ergebnis[4][0])
         except:
+            print("Adressabfrage: "+ address + str(sys.exc_info()))
             logging.error("Adressabfrage: "+ address + str(sys.exc_info()))
